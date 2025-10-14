@@ -58,6 +58,7 @@ import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
 
 public class HelloGluonApp extends Application {
 
+    private static final Swatch SWATCH = Swatch.LIGHT_GREEN;
     private final AppManager appManager = AppManager.initialize(this::postInit);
     private FloatingActionButton fab;
 
@@ -96,7 +97,7 @@ public class HelloGluonApp extends Application {
     }
 
     private void postInit(Scene scene) {
-        Swatch.LIGHT_GREEN.assignTo(scene);
+        SWATCH.assignTo(scene);
         scene.getStylesheets().add(HelloGluonApp.class.getResource("styles.css").toExternalForm());
 
         if (Platform.isDesktop()) {
@@ -147,8 +148,8 @@ public class HelloGluonApp extends Application {
         });
 
         StatusBarService.create().ifPresent(service -> {
-            boolean isAppBarDark = isDarkColor(appManager.getSwatch().getColor(SwatchElement.PRIMARY_500));
-            boolean isSceneDark = isDarkColor(appManager.getSwatch().getColor(SwatchElement.PRIMARY_100));
+            boolean isAppBarDark = isDarkColor(SWATCH.getColor(SwatchElement.PRIMARY_500));
+            boolean isSceneDark = isDarkColor(SWATCH.getColor(SwatchElement.PRIMARY_100));
             service.setSystemBarsAppearance(
                     isAppBarDark ? StatusBarService.APPEARANCE.LIGHT : StatusBarService.APPEARANCE.DARK,
                     isSceneDark ? StatusBarService.APPEARANCE.LIGHT : StatusBarService.APPEARANCE.DARK);
