@@ -14,24 +14,19 @@
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>21</javafx.version>
         <charm.version>6.2.3</charm.version>
-        <attach.version>4.0.24-SNAPSHOT</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
-        <gluonfx.maven.plugin.version>1.0.28-SNAPSHOT</gluonfx.maven.plugin.version>
-        <main.class>com.gluonhq.hello.HelloGluonApp</main.class>
+        <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
+        <main.class>com.gluonhq.samples.alarm.Alarm</main.class>
         <app.identifier>${main.class}</app.identifier>
         <app.description>The HelloGluon app</app.description>
-        <package.type/>
-        <mac.app.store/>
-        <mac.signing.user.name/>
-        <bundle.version/>
-        <bundle.short.version/>
-        <version.code/>
-        <provided.keystore.path/>
-        <provided.keystore.password/>
-        <provided.key.alias/>
-        <provided.key.alias.password/>
+        <charm.cloudlink.version>6.0.7</charm.cloudlink.version>
+        <glisten.afterburner.version>2.1.0</glisten.afterburner.version>
+        <attach.version>4.0.21</attach.version>
+        <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+        <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -40,9 +35,29 @@
             <version>${javafx.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
             <version>${charm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>glisten-afterburner</artifactId>
+            <version>${glisten.afterburner.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-cloudlink-client</artifactId>
+            <version>${charm.cloudlink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>connect</artifactId>
+            <version>${connect.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -52,6 +67,16 @@
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>lifecycle</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>local-notifications</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>runtime-args</artifactId>
             <version>${attach.version}</version>
         </dependency>
         <dependency>
@@ -68,6 +93,19 @@
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>util</artifactId>
             <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.json</artifactId>
+            <version>1.1.6</version>
+            <classifier>module</classifier>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
@@ -116,6 +154,8 @@
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
+                        <list>local-notifications</list>
+                        <list>runtime-args</list>
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
@@ -125,16 +165,6 @@
                         <vendor>Gluon</vendor>
                         <description>${app.description}</description>
                         <packageType>${package.type}</packageType>
-                        <!-- for macOS/iOS -->
-                        <macAppStore>${mac.app.store}</macAppStore>
-                        <bundleShortVersion>${bundle.short.version}</bundleShortVersion>
-                        <bundleVersion>${bundle.version}</bundleVersion>
-                        <!-- for Android -->
-                        <versionCode>${version.code}</versionCode>
-                        <providedKeyStorePath>${provided.keystore.path}</providedKeyStorePath>
-                        <providedKeyStorePassword>${provided.keystore.password}</providedKeyStorePassword>
-                        <providedKeyAlias>${provided.key.alias}</providedKeyAlias>
-                        <providedKeyAliasPassword>${provided.key.alias.password}</providedKeyAliasPassword>
                     </releaseConfiguration>
                 </configuration>
             </plugin>
@@ -156,7 +186,6 @@
             <properties>
                 <package.type>pkg</package.type>
                 <mac.app.store>false</mac.app.store>
-                <bundle.version>2.${env.GITHUB_RUN_NUMBER}</bundle.version>
                 <bundle.short.version>1.0</bundle.short.version>
             </properties>
         </profile>
@@ -165,7 +194,6 @@
             <properties>
                 <package.type>pkg</package.type>
                 <mac.app.store>true</mac.app.store>
-                <bundle.version>2.${env.GITHUB_RUN_NUMBER}</bundle.version>
                 <bundle.short.version>1.6</bundle.short.version>
             </properties>
         </profile>
@@ -173,20 +201,15 @@
             <id>ios</id>
             <properties>
                 <gluonfx.target>ios</gluonfx.target>
-                <bundle.version>${env.GITHUB_RUN_NUMBER}</bundle.version>
                 <bundle.short.version>1.0</bundle.short.version>
             </properties>
         </profile>
         <profile>
             <id>android</id>
             <properties>
+                <package.type>apk</package.type>
                 <gluonfx.target>android</gluonfx.target>
                 <app.identifier>com.gluonhq.samples.hellogluon</app.identifier>
-                <version.code>${env.GITHUB_RUN_NUMBER}</version.code>
-                <provided.keystore.path>${env.GLUON_ANDROID_KEYSTOREPATH}</provided.keystore.path>
-                <provided.keystore.password>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</provided.keystore.password>
-                <provided.key.alias>${env.GLUON_ANDROID_KEYALIAS}</provided.key.alias>
-                <provided.key.alias.password>${env.GLUON_ANDROID_KEYALIAS_PASSWORD}</provided.key.alias.password>
             </properties>
         </profile>
         <profile>

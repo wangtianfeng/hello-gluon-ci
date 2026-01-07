@@ -2,7 +2,7 @@ name: macOS x86_64
 
 on:
   push:
-    branches: [ master ]
+#    branches: [ master ]
 
 jobs:
   build:
