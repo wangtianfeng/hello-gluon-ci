@@ -17,7 +17,7 @@
         <attach.version>4.0.24-SNAPSHOT</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
-        <gluonfx.maven.plugin.version>1.0.28-SNAPSHOT</gluonfx.maven.plugin.version>
+        <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
         <main.class>com.gluonhq.hello.HelloGluonApp</main.class>
         <app.identifier>${main.class}</app.identifier>
         <app.description>The HelloGluon app</app.description>
@@ -129,12 +129,7 @@
                         <macAppStore>${mac.app.store}</macAppStore>
                         <bundleShortVersion>${bundle.short.version}</bundleShortVersion>
                         <bundleVersion>${bundle.version}</bundleVersion>
-                        <!-- for Android -->
-                        <versionCode>${version.code}</versionCode>
-                        <providedKeyStorePath>${provided.keystore.path}</providedKeyStorePath>
-                        <providedKeyStorePassword>${provided.keystore.password}</providedKeyStorePassword>
-                        <providedKeyAlias>${provided.key.alias}</providedKeyAlias>
-                        <providedKeyAliasPassword>${provided.key.alias.password}</providedKeyAliasPassword>
+                        
                     </releaseConfiguration>
                 </configuration>
             </plugin>
