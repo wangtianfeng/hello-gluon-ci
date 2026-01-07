@@ -16,7 +16,7 @@ jobs:
           graalvm: '22.1.0.1-Final'
           jdk: 'java17'
         env:
-          GITHUB_TOKEN: ${{ secrets.gluonfx-package }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Java
         uses: actions/setup-java@v3
