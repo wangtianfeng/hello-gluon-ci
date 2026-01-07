@@ -119,41 +119,41 @@ public class HelloGluonApp extends Application {
     private final DoubleProperty bottomInset = new SimpleDoubleProperty();
 
     private void fixesForAndroid() {
-        appManager.getGlassPane().getChildren().addListener((ListChangeListener<Node>) c -> {
-            if (fabNode != null) {
-                return;
-            }
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    fabNode = c.getAddedSubList().stream()
-                            .filter(n -> n instanceof Layer && !((Layer) n).getChildren().isEmpty())
-                            .map(n -> ((Layer) n).getChildren().get(0))
-                            .filter(n -> n instanceof Button && n.getStyleClass().contains("fab"))
-                            .findFirst()
-                            .orElse(null);
-                    if (fabNode != null) {
-                        fabNode.translateYProperty().bind(bottomInset);
-                    }
-                }
-            }
-
-        });
-        AppBar appBar = appManager.getAppBar();
-        DisplayService.create().ifPresent(service -> {
-            service.systemBarsInsetsProperty().addListener((obs, ov, nv) -> {
-                Insets padding = appBar.getPadding();
-                appBar.setPadding(new Insets(nv.getTop(), padding.getLeft(), padding.getRight(), padding.getBottom()));
-                bottomInset.set(-nv.getBottom());
-            });
-        });
-
-        StatusBarService.create().ifPresent(service -> {
-            boolean isAppBarDark = isDarkColor(SWATCH.getColor(SwatchElement.PRIMARY_500));
-            boolean isSceneDark = isDarkColor(SWATCH.getColor(SwatchElement.PRIMARY_100));
-            service.setSystemBarsAppearance(
-                    isAppBarDark ? StatusBarService.APPEARANCE.LIGHT : StatusBarService.APPEARANCE.DARK,
-                    isSceneDark ? StatusBarService.APPEARANCE.LIGHT : StatusBarService.APPEARANCE.DARK);
-        });
+//        appManager.getGlassPane().getChildren().addListener((ListChangeListener<Node>) c -> {
+//            if (fabNode != null) {
+//                return;
+//            }
+//            while (c.next()) {
+//                if (c.wasAdded()) {
+//                    fabNode = c.getAddedSubList().stream()
+//                            .filter(n -> n instanceof Layer && !((Layer) n).getChildren().isEmpty())
+//                            .map(n -> ((Layer) n).getChildren().get(0))
+//                            .filter(n -> n instanceof Button && n.getStyleClass().contains("fab"))
+//                            .findFirst()
+//                            .orElse(null);
+//                    if (fabNode != null) {
+//                        fabNode.translateYProperty().bind(bottomInset);
+//                    }
+//                }
+//            }
+//
+//        });
+//        AppBar appBar = appManager.getAppBar();
+//        DisplayService.create().ifPresent(service -> {
+//            service.systemBarsInsetsProperty().addListener((obs, ov, nv) -> {
+//                Insets padding = appBar.getPadding();
+//                appBar.setPadding(new Insets(nv.getTop(), padding.getLeft(), padding.getRight(), padding.getBottom()));
+//                bottomInset.set(-nv.getBottom());
+//            });
+//        });
+//
+//        StatusBarService.create().ifPresent(service -> {
+//            boolean isAppBarDark = isDarkColor(SWATCH.getColor(SwatchElement.PRIMARY_500));
+//            boolean isSceneDark = isDarkColor(SWATCH.getColor(SwatchElement.PRIMARY_100));
+//            service.setSystemBarsAppearance(
+//                    isAppBarDark ? StatusBarService.APPEARANCE.LIGHT : StatusBarService.APPEARANCE.DARK,
+//                    isSceneDark ? StatusBarService.APPEARANCE.LIGHT : StatusBarService.APPEARANCE.DARK);
+//        });
     }
 
     private static boolean isDarkColor(Color color) {
