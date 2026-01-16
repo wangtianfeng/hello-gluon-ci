@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gluonhq.samples</groupId>
-    <artifactId>hellogluon</artifactId>
+    <artifactId>alarm</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>HelloGluon</name>
+    <name>alarm</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
         <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
         <main.class>com.gluonhq.samples.alarm.Alarm</main.class>
         <app.identifier>${main.class}</app.identifier>
-        <app.description>The HelloGluon app</app.description>
+        <app.description>The alarm app</app.description>
         <charm.cloudlink.version>6.0.7</charm.cloudlink.version>
         <glisten.afterburner.version>2.1.0</glisten.afterburner.version>
         <attach.version>4.0.21</attach.version>
