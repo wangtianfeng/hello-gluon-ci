@@ -5,241 +5,124 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wangtianfeng.learning.jdk.javafx</groupId>
-    <artifactId>sign</artifactId>
+    <artifactId>DoodleTrace</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>sign</name>
+    <name>DoodleTrace</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.9.2</junit.version>
-        <main.class>com.wangtianfeng.learning.jdk.javafx.sign.MainApplication</main.class>
+        <maven.compiler.release>11</maven.compiler.release>
+        <javafx.version>21</javafx.version>
+        <charm.version>6.2.3</charm.version>
+        <connect.version>2.0.1</connect.version>
+        <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+        <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
         <app.identifier>${main.class}</app.identifier>
+        <app.description>The alarm app</app.description>
+        <charm.cloudlink.version>6.0.7</charm.cloudlink.version>
+        <glisten.afterburner.version>2.1.0</glisten.afterburner.version>
+        <attach.version>4.0.21</attach.version>
+        <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+        <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
+        <main.class>com.carlfx.GluonApplication</main.class>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>19.0.2</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>19.0.2</version>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>${charm.version}</version>
         </dependency>
         <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.16.1</version> <!-- 模块化的包，jlink不支持自动模块(非模块化的包) -->
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>${attach.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>display</artifactId>
+            <version>${attach.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>lifecycle</artifactId>
+            <version>${attach.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>statusbar</artifactId>
+            <version>${attach.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>storage</artifactId>
+            <version>${attach.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>windows</id>
-            <properties>
-                <icon.path>${project.build.directory}/classes/sign.ico</icon.path>
-                <gluonfx.target>host</gluonfx.target>
-            </properties>
-        </profile>
-        <profile>
-            <id>mac</id>
-            <properties>
-                <icon.path>${project.build.directory}/classes/sign.icns</icon.path>
-                <gluonfx.target>host</gluonfx.target>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>linux</id>
-            <properties>
-                <gluonfx.target>host</gluonfx.target>
-                <icon.path>${project.build.directory}/classes/sign.png</icon.path>
-            </properties>
-        </profile>
-        <profile>
-            <id>android</id>
-            <properties>
-                <package.type>apk</package.type>
-                <gluonfx.target>android</gluonfx.target>
-                <app.identifier>com.gluonhq.samples.hellogluon</app.identifier>
-            </properties>
-        </profile>
-    </profiles>
     <build>
-        <finalName>OpenSign</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                </configuration>
+                <version>3.8.1</version>
             </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
-                <executions>
-                    <execution>
-                        <!-- 一般通过mvn clean javafx:run直接运行项目，或执行javafx:jlink创建镜像文件，如果是需要打包，则可以直接使用下面的jpackage -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>
-                                com.wangtianfeng.learning.jdk.javafx.sign/com.wangtianfeng.learning.jdk.javafx.sign.MainApplication
-                            </mainClass>
-                            <!-- 这个不生效，不知道是不是bug -->
-                            <!-- <addModules>com.wangtianfeng.learning.jdk.javafx.sign,javafx.controls,javafx.fxml,java.base,java.sql,java.security.jgss,jdk.crypto.ec</addModules>-->
-                            <launcher>OpenSign</launcher>
-                            <jlinkZipName>OpenSign</jlinkZipName>
-                            <jlinkImageName>OpenSign</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                            <compress>2</compress>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.panteleyev</groupId>
-                <artifactId>jpackage-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <!-- 基本信息 -->
-                    <name>OpenSign</name>
-                    <appVersion>1.0.0</appVersion>
-                    <vendor>Shanon.top</vendor>
-                    <copyright>Copyright © 2025 Shanon</copyright>
-                    <description>Sign Tool</description>
-                    <module>
-                        com.wangtianfeng.learning.jdk.javafx.sign/com.wangtianfeng.learning.jdk.javafx.sign.MainApplication
-                    </module>
-                    <!-- 应用启动时的选项 -->
-                    <javaOptions>
-                        <javaOption>-Xmx2g</javaOption>
-                        <javaOption>-Xms2g</javaOption>
-                        <javaOption>-XX:+UseG1GC</javaOption>
-<!--                        <javaOption>-Djavafx.preloader=com.wangtianfeng.learning.jdk.javafx.sign.AppPreloader</javaOption>-->
-                        <javaOption>-Dprism.verbose=false</javaOption>
-                        <javaOption>-Dprism.order=sw</javaOption>
-                        <javaOption>-Xverify:none</javaOption>
-                        <javaOption>-XX:TieredStopAtLevel=1</javaOption>
-                        <javaOption>-XX:+TieredCompilation</javaOption>
-                        <javaOption>-Djava.awt.headless=true</javaOption>
-                        <javaOption>-XX:TieredStopAtLevel=1</javaOption>
-                        <javaOption>-Djavafx.verbose=false</javaOption>
-                        <javaOption>-Djavafx.pulseLogger=false</javaOption>
-                        <javaOption>-Dfile.encoding=UTF-8</javaOption>
-                    </javaOptions>
-                    <!-- 应用启动时传给main方法的参数 -->
-                    <arguments>
-                        <argument>abc</argument>
-                    </arguments>
-                    <!-- ↓ start 传给jlink的参数，如果前置使用了jlink则配置runtimeImage即可，不需要配置这些 start ↓ -->
-                    <!-- 但如果配置了这些，则可以完全不依赖javafx-maven-plugin插件 -->
-                    <modulePaths>
-                        <modulePath>${project.build.directory}/${build.finalName}.jar</modulePath>
-                        <!-- 需要maven-dependency-plugin插件配合复制依赖包 -->
-                        <modulePath>${project.build.directory}/lib</modulePath>
-                    </modulePaths>
-                    <!-- 增加https支持，也可以写在module-info.java中，但jdeps分析不出来 -->
-<!--                    <addModules>java.security.jgss,jdk.crypto.ec</addModules>-->
-                    <!-- 也可以通过jLinkOptions直接指定jlink参数 -->
-                    <jLinkOptions>
-                        <jLinkOption>--compress=2</jLinkOption>
-                        <jLinkOption>--strip-native-commands</jLinkOption>
-                        <jLinkOption>--strip-debug</jLinkOption>
-                        <jLinkOption>--no-man-pages</jLinkOption>
-                        <jLinkOption>--no-header-files</jLinkOption>
-                    </jLinkOptions>
-                    <!-- ↑ end 传给jlink的参数，如果前置使用了jlink则配置runtimeImage即可，不需要配置这些 end ↑ -->
-                    <!-- <runtimeImage>${project.build.directory}/${project.build.finalName}</runtimeImage>-->
-                    <icon>${icon.path}</icon>
-                    <!-- Windows 特定配置 -->
-                    <winShortcut>true</winShortcut>
-                    <winDirChooser>true</winDirChooser>
-                    <!-- mac特定配置 -->
-                    <macPackageIdentifier>com.wangtianfeng.learning.jdk.javafx.sign</macPackageIdentifier>
-                    <macPackageName>${project.build.finalName}</macPackageName>
-                    <macSign>false</macSign>
-                    <!-- 输出配置 -->
-                    <destination>${project.build.directory}</destination>
-                    <temp>${project.build.directory}/${project.build.finalName}Temp</temp>
-                    <!-- 打包详情和控制台 -->
-                    <!-- <winConsole>true</winConsole>-->
-                    <!-- <verbose>true</verbose>-->
-                    <!-- 将主应用启动程序注册为后台服务类型应用程序 -->
-                    <!--<launcherAsService>true</launcherAsService>-->
+                    <mainClass>${main.class}</mainClass>
                 </configuration>
-            </plugin>
-
-            <!-- 复制依赖到lib目录 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                            <includeScope>runtime</includeScope>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>gluonfx-maven-plugin</artifactId>
-                <version>1.0.27</version>
+                <version>${gluonfx.maven.plugin.version}</version>
                 <configuration>
-                    <target>${gluonfx.target}</target>      <!-- 当前操作系统类型 -->
-<!--                    <target>ios</target>       &lt;!&ndash; iOS &ndash;&gt;-->
-<!--                    <target>android</target>   &lt;!&ndash; Android &ndash;&gt;-->
-<!--                    <target>linux-aarch64</target> &lt;!&ndash; 树莓派等 &ndash;&gt;-->
+                    <target>${gluonfx.target}</target>
+                    <attachList>
+                        <list>display</list>
+                        <list>lifecycle</list>
+                        <list>statusbar</list>
+                        <list>storage</list>
+                    </attachList>
                     <mainClass>${main.class}</mainClass>
-<!--                    <javafxStaticSdkVersion>21.0.3</javafxStaticSdkVersion>-->
-
-                    <!-- 声明需要反射的类，也可以执行mvn gluonfx:build后，-->
-                    <!-- 将生成的target/gluonfx/aarch64-darwin/gvm目录下的reflectionconfig、resourceconfig、jniconfig文件 -->
-                    <!-- 重命名为reflect-config.json、resource-config.json、jni-config.json后放到src/main/resources/META-INF/native-image/目录下 -->
-                    <!-- 并在文件中添加需要显示声明的反射类 -->
-<!--                    <reflectionList>-->
-<!--                        <list>com.wangtianfeng.learning.jdk.javafx.sign.SignController</list>-->
-<!--                        <list>${project.basedir}/src/main/META-INF/native-image/reflection-config.json</list>-->
-<!--                    </reflectionList>-->
-                    <appIdentifier>${app.identifier}</appIdentifier>
-                    <!-- 配置打包为安装文件，默认为可执行文件 -->
-                    <releaseConfiguration>
-                        <vendor>Your Company</vendor>
-                        <description>A sample JavaFX app</description>
-                        <packageType>${package.type}</packageType>
-                    </releaseConfiguration>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ios</id>
+            <properties>
+                <gluonfx.target>ios</gluonfx.target>
+            </properties>
+        </profile>
+        <profile>
+            <id>android</id>
+            <properties>
+                <gluonfx.target>android</gluonfx.target>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
 </project>
