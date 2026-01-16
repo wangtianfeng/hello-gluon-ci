@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gluonhq.samples</groupId>
-    <artifactId>beacons</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>Beacons</name>
+    <groupId>com.wangtianfeng.learning.jdk.javafx</groupId>
+    <artifactId>DoodleTrace</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>DoodleTrace</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,6 @@
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
         <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
-        <main.class>com.gluonhq.samples.alarm.Alarm</main.class>
         <app.identifier>${main.class}</app.identifier>
         <app.description>The alarm app</app.description>
         <charm.cloudlink.version>6.0.7</charm.cloudlink.version>
@@ -25,7 +24,7 @@
         <attach.version>4.0.21</attach.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
         <gluonfx.maven.plugin.version>1.0.27</gluonfx.maven.plugin.version>
-        <mainClassName>com.gluonhq.samples.beacons.Beacons</mainClassName>
+        <main.class>com.carlfx.GluonApplication</main.class>
     </properties>
 
     <dependencies>
@@ -35,49 +34,38 @@
             <version>${javafx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
             <version>${charm.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>glisten-afterburner</artifactId>
-            <version>${glisten.afterburner.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.gluonhq.attach</groupId>
-            <artifactId>ble</artifactId>
+            <artifactId>util</artifactId>
             <version>${attach.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>display</artifactId>
             <version>${attach.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>lifecycle</artifactId>
             <version>${attach.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>statusbar</artifactId>
             <version>${attach.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>storage</artifactId>
             <version>${attach.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gluonhq.attach</groupId>
-            <artifactId>util</artifactId>
-            <version>${attach.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
@@ -94,7 +82,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>${mainClassName}</mainClass>
+                    <mainClass>${main.class}</mainClass>
                 </configuration>
             </plugin>
 
@@ -105,21 +93,12 @@
                 <configuration>
                     <target>${gluonfx.target}</target>
                     <attachList>
-                        <list>ble</list>
                         <list>display</list>
                         <list>lifecycle</list>
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
-                    <reflectionList>
-                        <list>com.gluonhq.samples.beacons.settings.Settings</list>
-                        <list>com.gluonhq.samples.beacons.views.BeaconPresenter</list>
-                        <list>com.gluonhq.samples.beacons.views.BeaconsPresenter</list>
-                        <list>com.gluonhq.samples.beacons.views.BroadcastPresenter</list>
-                        <list>com.gluonhq.samples.beacons.views.MainPresenter</list>
-                        <list>com.gluonhq.samples.beacons.views.SettingsPresenter</list>
-                    </reflectionList>
-                    <mainClass>${mainClassName}</mainClass>
+                    <mainClass>${main.class}</mainClass>
                 </configuration>
             </plugin>
         </plugins>
@@ -146,5 +125,4 @@
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
-
 </project>
