@@ -57,8 +57,6 @@
   }, {
     "pattern":"javafx.graphics:\\Qcom/sun/glass/utils/NativeLibLoader.class\\E"
   }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/DrawCircle_Color.frag\\E"
-  }, {
     "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/DrawPgram_Color.frag\\E"
   }, {
     "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/FillCircle_Color.frag\\E"
