@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import java.net.URL?>
+<GridPane xmlns="http://javafx.com/javafx/8.0.171"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.wangtianfeng.learning.jdk.javafx.sign.SignController"
+          BorderPane.alignment="CENTER"
+          hgap="10" vgap="10"
+          prefWidth="800" prefHeight="450"
+          styleClass="root">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- 模式选择 -->
+    <Label text="模式:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+           BorderPane.alignment="CENTER_RIGHT"/>
+    <HBox spacing="10" GridPane.rowIndex="0" GridPane.columnIndex="1">
+        <RadioButton text="Open-API" userData="openapi"
+                     fx:id="openApiRadio"/>
+        <RadioButton text="Relay" userData="relay"
+                     fx:id="relayRadio"/>
+    </HBox>
+
+    <!-- appid 行 -->
+    <Label text="APP_ID:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+           BorderPane.alignment="CENTER_RIGHT"/>
+    <TextField fx:id="appIdField"
+               GridPane.rowIndex="1" GridPane.columnIndex="1"
+               GridPane.hgrow="ALWAYS"/>
+
+    <!-- secret 行 -->
+    <Label text="APP_SECRET:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+           BorderPane.alignment="CENTER_RIGHT"/>
+    <TextField fx:id="appSecretField"
+               GridPane.rowIndex="2" GridPane.columnIndex="1"
+               GridPane.hgrow="ALWAYS"/>
+
+    <!-- 动态行 (Relay模式显示) -->
+    <Label text="GRANT_TYPE:" fx:id="tokenLabel" visible="false"
+           GridPane.rowIndex="3" GridPane.columnIndex="0"
+           BorderPane.alignment="CENTER_RIGHT"/>
+    <TextField fx:id="grantTypeField" visible="false"
+               GridPane.rowIndex="3" GridPane.columnIndex="1"
+               GridPane.hgrow="ALWAYS"/>
+    <Label text="URL:" fx:id="urlLabel" visible="false"
+           GridPane.rowIndex="4" GridPane.columnIndex="0"
+           BorderPane.alignment="CENTER_RIGHT"/>
+    <TextField fx:id="urlField" visible="false"
+               GridPane.rowIndex="4" GridPane.columnIndex="1"
+               GridPane.hgrow="ALWAYS"/>
+
+    <!-- sign 行 -->
+    <Label fx:id="signLabel" text="SIGN:" GridPane.rowIndex="5" GridPane.columnIndex="0"
+           BorderPane.alignment="CENTER_RIGHT"/>
+    <TextArea fx:id="signArea" editable="false" wrapText="true"
+              GridPane.rowIndex="5" GridPane.columnIndex="1"
+              GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+
+    <!-- 按钮行 -->
+    <HBox BorderPane.alignment="CENTER_RIGHT" spacing="10"
+          GridPane.rowIndex="6" GridPane.columnIndex="0"
+          GridPane.columnSpan="2">
+        <Button text="清空" onAction="#handleClear"/>
+        <Button text="重置默认值" onAction="#handleReset"/>
+        <Button text="计算签名" onAction="#handleCalculate"
+                styleClass="calculate-button"/>
+    </HBox>
+
+<!--    <stylesheets>-->
+<!--        <URL value="@style.css"/>-->
+<!--    </stylesheets>-->
+</GridPane>
