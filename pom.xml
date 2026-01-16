@@ -52,14 +52,14 @@
             <id>windows</id>
             <properties>
                 <icon.path>${project.build.directory}/classes/sign.ico</icon.path>
-                <package.type>host</package.type>
+                <gluonfx.target>host</gluonfx.target>
             </properties>
         </profile>
         <profile>
             <id>mac</id>
             <properties>
                 <icon.path>${project.build.directory}/classes/sign.icns</icon.path>
-                <package.type>host</package.type>
+                <gluonfx.target>host</gluonfx.target>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -68,7 +68,7 @@
         <profile>
             <id>linux</id>
             <properties>
-                <package.type>host</package.type>
+                <gluonfx.target>host</gluonfx.target>
                 <icon.path>${project.build.directory}/classes/sign.png</icon.path>
             </properties>
         </profile>
@@ -216,7 +216,7 @@
                 <artifactId>gluonfx-maven-plugin</artifactId>
                 <version>1.0.27</version>
                 <configuration>
-                    <target>${package.type}</target>      <!-- 当前操作系统类型 -->
+                    <target>${gluonfx.target}</target>      <!-- 当前操作系统类型 -->
 <!--                    <target>ios</target>       &lt;!&ndash; iOS &ndash;&gt;-->
 <!--                    <target>android</target>   &lt;!&ndash; Android &ndash;&gt;-->
 <!--                    <target>linux-aarch64</target> &lt;!&ndash; 树莓派等 &ndash;&gt;-->
