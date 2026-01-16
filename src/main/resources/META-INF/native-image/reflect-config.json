@@ -346,6 +346,9 @@
   "name":"javafx.scene.shape.Circle"
 },
 {
+  "name":"javafx.scene.shape.Line"
+},
+{
   "name":"javafx.scene.shape.LineTo"
 },
 {

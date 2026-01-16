@@ -51,6 +51,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.sun.javafx.geom.Path2D",
+  "methods":[{"name":"<init>","parameterTypes":["int","byte[]","int","float[]","int"] }]
+},
+{
   "name":"java.lang.Boolean",
   "methods":[{"name":"booleanValue","parameterTypes":[] }, {"name":"getBoolean","parameterTypes":["java.lang.String"] }]
 },
