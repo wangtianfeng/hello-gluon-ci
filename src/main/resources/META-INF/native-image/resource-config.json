@@ -1,104 +1,27 @@
 {
   "resources":{
-  "includes":[{
-    "pattern":"\\QMETA-INF/fonts.mf\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/java.lang.System$LoggerFinder\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/java.time.zone.ZoneRulesProvider\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/java.util.spi.ResourceBundleControlProvider\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/javax.json.spi.JsonProvider\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/javax.xml.stream.XMLInputFactory\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/G_Blue_500_58x58.png\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/afterburner/alarm.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/afterburner/events.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/afterburner/gluon.fxml\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/control/glisten.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/control/swatch_blue.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/control/swatch_orange.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/charm/glisten/control/theme_light.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/samples/alarm/service/baseline_alarm_add_black_18dp.png\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/samples/alarm/style.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/samples/alarm/views/alarm.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/samples/alarm/views/alarm.fxml\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/samples/alarm/views/configuration.properties\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/samples/alarm/views/events.css\\E"
-  }, {
-    "pattern":"\\Qcom/gluonhq/samples/alarm/views/events.fxml\\E"
-  }, {
-    "pattern":"\\Qgluoncloudlink_config.json\\E"
-  }, {
-    "pattern":"\\Qgluonmobile.license\\E"
-  }, {
-    "pattern":"\\Qicon.png\\E"
-  }, {
-    "pattern":"java.base:\\Qjdk/internal/icu/impl/data/icudt72b/ubidi.icu\\E"
-  }, {
-    "pattern":"javafx.base:\\Qcom/sun/javafx/reflect/Trampoline.class\\E"
-  }, {
-    "pattern":"javafx.controls:\\Qcom/sun/javafx/scene/control/skin/modena/modena.bss\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/glass/utils/NativeLibLoader.class\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/DrawPgram_Color.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/FillCircle_Color.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/FillPgram_Color.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/Solid_TextureRGB.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/Texture_Color.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/scenario/effect/impl/es2/glsl/Blend_SRC_IN.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/scenario/effect/impl/es2/glsl/LinearConvolveShadow_16.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/scenario/effect/impl/es2/glsl/LinearConvolveShadow_20.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/scenario/effect/impl/es2/glsl/LinearConvolveShadow_96.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qcom/sun/scenario/effect/impl/es2/glsl/LinearConvolve_16.frag\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qlibglass.dylib\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qlibjavafx_font.dylib\\E"
-  }, {
-    "pattern":"javafx.graphics:\\Qlibprism_es2.dylib\\E"
-  }]},
-  "bundles":[{
-    "name":"com.gluonhq.charm.glisten.afterburner.gluon"
-  }, {
-    "name":"com.gluonhq.samples.alarm.drawer",
-    "locales":[""]
-  }, {
-    "name":"com.gluonhq.samples.alarm.views.alarm",
-    "locales":[""]
-  }, {
-    "name":"com.gluonhq.samples.alarm.views.events",
-    "locales":[""]
-  }, {
-    "name":"com.sun.javafx.tk.quantum.QuantumMessagesBundle",
-    "locales":["", "zh-CN"]
-  }, {
-    "name":"com/sun/javafx/scene/control/skin/resources/controls",
-    "locales":["", "zh-CN"]
-  }]
+    "includes":[
+      {"pattern":"\\QMETA-INF/services/.*\\E"},
+      {"pattern":"\\Qcom/gluonhq/.*\\E"},
+      {"pattern":"\\Q.*\\.fxml\\E"},
+      {"pattern":"\\Q.*\\.png\\E"},
+      {"pattern":"\\Q.*\\.css\\E"},
+      {"pattern":"\\Q.*\\.properties\\E"},
+      {"pattern":"\\Q.*\\.ttf\\E"},
+      {"pattern":"\\Q.*\\.woff\\E"},
+      {"pattern":"\\Q.*\\.woff2\\E"}
+    ],
+    "excludes":[
+      {"pattern":"\\Q.*\\.dylib\\E"},
+      {"pattern":"\\Q.*\\.dll\\E"},
+      {"pattern":"\\Qlibglass\\.so\\E"},
+      {"pattern":"\\Qlibprism_es2\\.so\\E"}
+    ]
+  },
+  "bundles":[
+    {"name":"com.gluonhq.charm.glisten.afterburner.gluon"},
+    {"name":"com.gluonhq.samples.alarm.drawer", "locales":[""]},
+    {"name":"com.gluonhq.samples.alarm.views.alarm", "locales":[""]},
+    {"name":"com.gluonhq.samples.alarm.views.events", "locales":[""]}
+  ]
 }
